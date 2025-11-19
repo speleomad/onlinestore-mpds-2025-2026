@@ -5,13 +5,15 @@ import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products:Product[]=[]
+  products: Product[] = [];
   constructor(private productService: ProductService) { }
   ngOnInit(): void {
-  this.products=this.productService.getProducts();
+    this.products = this.productService.getProducts();
   }
-
+  onProductDeleted(id: number) {
+    this.products = this.products.filter(product => product.id !== id);
+  } 
 }
